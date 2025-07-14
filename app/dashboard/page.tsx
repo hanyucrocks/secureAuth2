@@ -1,15 +1,17 @@
 "use client"
 
-import { useState } from "react"
-import { ProtectedRoute } from "@/components/ProtectedRoute"
-import { TopBar } from "@/components/dashboard/topbar"
-import { SendMoneyCard } from "@/components/dashboard/send-money-card"
-import { TransactionFeed } from "@/components/dashboard/transaction-feed"
-import { AnomalyAlert } from "@/components/dashboard/anomaly-alert"
-import { MapVisualization } from "@/components/dashboard/map-visualization"
-import { AuthActivity } from "@/components/dashboard/auth-activity"
-import { SpendingGraph } from "@/components/dashboard/spending-graph"
-import { SessionInfo } from "@/components/SessionInfo"
+import dynamic from "next/dynamic";
+import { useState } from "react";
+import { ProtectedRoute } from "@/components/ProtectedRoute";
+import { TopBar } from "@/components/dashboard/topbar";
+
+const SendMoneyCard = dynamic(() => import("@/components/dashboard/send-money-card").then(m => m.SendMoneyCard), { ssr: false });
+const TransactionFeed = dynamic(() => import("@/components/dashboard/transaction-feed").then(m => m.TransactionFeed), { ssr: false });
+const AnomalyAlert = dynamic(() => import("@/components/dashboard/anomaly-alert").then(m => m.AnomalyAlert), { ssr: false });
+const MapVisualization = dynamic(() => import("@/components/dashboard/map-visualization").then(m => m.MapVisualization), { ssr: false });
+const AuthActivity = dynamic(() => import("@/components/dashboard/auth-activity").then(m => m.AuthActivity), { ssr: false });
+const SpendingGraph = dynamic(() => import("@/components/dashboard/spending-graph").then(m => m.SpendingGraph), { ssr: false });
+const SessionInfo = dynamic(() => import("@/components/SessionInfo").then(m => m.SessionInfo), { ssr: false });
 
 export default function DashboardPage() {
   const [showAnomalyAlert, setShowAnomalyAlert] = useState(true)
