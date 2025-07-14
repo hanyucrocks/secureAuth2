@@ -23,6 +23,7 @@ export function SendMoneyCard() {
 
   // Auto-detect device info
   function getDeviceInfo() {
+    if (typeof navigator === "undefined") return "Unknown Device";
     const ua = navigator.userAgent;
     if (/iPhone/.test(ua)) return "iPhone";
     if (/iPad/.test(ua)) return "iPad";
@@ -39,7 +40,7 @@ export function SendMoneyCard() {
 
   function getLocation() {
     return new Promise<{ lat: number | null; lng: number | null }>((resolve) => {
-      if (!navigator.geolocation) {
+      if (typeof navigator === "undefined" || !navigator.geolocation) {
         resolve({ lat: null, lng: null });
       } else {
         navigator.geolocation.getCurrentPosition(
